@@ -95,7 +95,7 @@ A status result.
        <result>Created new node. id: 1</result>
     </results>
 
-A Node element will be of the form:
+A Node element will be of the form [node-v10.html](node-v10):
 
     <!-- ID may not exist if the node was not created yet -->    
     <node id="[ID]">
