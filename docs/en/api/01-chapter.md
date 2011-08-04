@@ -65,7 +65,7 @@ Result:  An Item List of `nodes`. Each `node` is of the form:
 	<tags/>
     </node>
 
-### Exporting Nodes
+### Listing Nodes
 
 Export the node definitions for in XML format. Same as list above.
 
@@ -73,7 +73,7 @@ URL:
 
     /nodes
 
-### Importing Nodes ###
+### Adding a Node ###
 
 Import node definition in XML format.
 
