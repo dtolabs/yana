@@ -1,9 +1,12 @@
 package yana.node
 
+import groovy.xml.MarkupBuilder
+
 import grails.converters.XML
 import grails.converters.JSON
 
 import yana.XmlParserUtil
+import yana.attributes.*
 
 class NodeRestController {
     //
@@ -16,9 +19,44 @@ class NodeRestController {
             case "json":
                 render list as JSON 
                 break
+            case "rundeck-xml":
+                render generateRundeckXml(list)
+                break;
             default:
                 render list as XML  
         }
+    }
+
+    //
+    // Generates a Rundeck XML formatted view of the Nodes
+    //
+    def generateRundeckXml(list) {
+        def writer = new StringWriter()
+        def xml = new MarkupBuilder(writer)
+        xml.project() {
+            list.each{ Node nodeInstance->
+                node( name:nodeInstance.name, 
+                      description:nodeInstance.description,
+                      osName:nodeInstance.osName,
+                      hostname:nodeInstance.hostname,
+                      osFamily:nodeInstance.osFamily,
+                      tags: nodeInstance.tagsString(",")
+                      ) {
+                    nodeInstance.attributes.each{ Attribute attr->
+                        attribute(name:attr.name, value:attr.value)
+                    }
+                    nodeInstance.externalAttributes.each{ Attributes attrs->
+                        attrs.external.each{ ExternalAttribute eattr->
+                            // prefix with Attributes' name
+                            attribute(name:attrs.name+"."+eattr.name, 
+                                      value:eattr.value)
+                        }
+                    }
+                    
+                }
+            }
+        }
+        return writer.toString()
     }
 
     //
@@ -164,4 +202,6 @@ class NodeRestController {
             }
         }
     }
+
+
 }

@@ -11,13 +11,14 @@ class Node {
     String osName
     String osFamily
 
-    // String hostname
+    String hostname
     // Date dateCreated
     // Date dateModified
 
     static constraints = {
         name(unique:true, blank:false)
         description(blank:true, nullable:true)
+        hostname(blank:true, nullable:true)
         osName(blank:true, nullable:true)
         osFamily(blank:true, inList:['unix','windows'])
         tags(nullable:true)
@@ -46,6 +47,7 @@ class Node {
         // populate the Node properties from the map
         nodeInstance.name        = map['name']
         nodeInstance.description = map['description']
+        nodeInstance.hostname = map['hostname']
         nodeInstance.osName      = map['osName']
         nodeInstance.osFamily    = map['osFamily']
 
@@ -101,5 +103,13 @@ class Node {
         return nodeInstance
     }
 
+   // Generate tags as a delimited string
+   def tagsString(delimiter) {
+       def list = []
+       this.tags.each {tag->
+           list << tag.name
+       }
+       return list.join(delimiter)
+   }
 }
 

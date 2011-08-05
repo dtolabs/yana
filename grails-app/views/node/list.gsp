@@ -28,6 +28,8 @@
                         
                             <g:sortableColumn property="description" title="${message(code: 'node.description.label', default: 'Description')}" />
                         
+                            <g:sortableColumn property="hostname" title="${message(code: 'node.hostname.label', default: 'Hostname')}" />
+                        
                             <g:sortableColumn property="osName" title="${message(code: 'node.osName.label', default: 'Os Name')}" />
                         
                             <g:sortableColumn property="osFamily" title="${message(code: 'node.osFamily.label', default: 'Os Family')}" />
@@ -43,6 +45,8 @@
                             <td>${fieldValue(bean: nodeInstance, field: "name")}</td>
                         
                             <td>${fieldValue(bean: nodeInstance, field: "description")}</td>
+                        
+                            <td>${fieldValue(bean: nodeInstance, field: "hostname")}</td>
                         
                             <td>${fieldValue(bean: nodeInstance, field: "osName")}</td>
                         

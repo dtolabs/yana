@@ -2,6 +2,7 @@ package yana
 
 import grails.test.*
 import yana.node.Node
+import yana.node.Tag
 
 class NodeIntegrationTests extends GrailsUnitTestCase {
 
@@ -27,4 +28,11 @@ class NodeIntegrationTests extends GrailsUnitTestCase {
 
     }
 
+    void testTagsString() {
+        def nodeInstance = new Node(name: 'node1', osFamily: 'unix')
+        nodeInstance.addToTags(new Tag(name: 'web'))
+        nodeInstance.addToTags(new Tag(name: 'app'))
+
+        assertEquals "app,web", nodeInstance.tagsString(",")
+    }
 }

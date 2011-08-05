@@ -48,6 +48,15 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
+                                    <label for="hostname"><g:message code="node.hostname.label" default="Hostname" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: nodeInstance, field: 'hostname', 'errors')}">
+                                    <g:textField name="hostname" value="${nodeInstance?.hostname}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
                                     <label for="osName"><g:message code="node.osName.label" default="Os Name" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: nodeInstance, field: 'osName', 'errors')}">

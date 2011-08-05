@@ -44,6 +44,13 @@
                         </tr>
                     
                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="node.hostname.label" default="Hostname" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: nodeInstance, field: "hostname")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="node.osName.label" default="Os Name" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: nodeInstance, field: "osName")}</td>
