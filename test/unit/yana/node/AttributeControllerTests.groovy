@@ -12,6 +12,6 @@ class AttributeControllerTests extends ControllerUnitTestCase {
     }
 
     void testSomething() {
-
+        assertTrue(true)
     }
 }

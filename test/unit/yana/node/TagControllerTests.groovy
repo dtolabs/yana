@@ -12,6 +12,6 @@ class TagControllerTests extends ControllerUnitTestCase {
     }
 
     void testSomething() {
-
+        assertTrue(true)
     }
 }

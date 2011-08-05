@@ -12,6 +12,6 @@ class ExternalAttributeControllerTests extends ControllerUnitTestCase {
     }
 
     void testSomething() {
-
+        assertTrue(true)
     }
 }
