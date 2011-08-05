@@ -69,7 +69,7 @@ either from source or via WAR file.
 
 ### System Requirements
 
-* [#Java](Java)
+* [Java](#Java)
 * Tomcat
 * Network ports
 

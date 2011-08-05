@@ -2,9 +2,30 @@
 
 ## What is Yana?
 
+Yana is yet another node authority! What is a node authority?
+Yana is an information repository where you store information
+about hosts on your network. 
+
+Driving tools and other operations management software from
+an up to date central repository about the nodes in your 
+environment facilitates predictable automation.
+
 ## Getting help
 
+* Mailing list:  [http://groups.google.com/group/yana-discuss](http://groups.google.com/group/yana-discuss)
+
+## Yana from 30,000 feet
+
+Features
+
+* Simple data model
+* Web API
+
 ## Feedback
+
+If you find problems with Yana, or if you have questions, 
+remarks, or ideas about it, please send an email to the 
+Yana mailing list, [yana-discuss@groups.google.com](mailto:yana-discuss@groups.google.com).
 
 ## What's next?
 

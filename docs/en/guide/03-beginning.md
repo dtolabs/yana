@@ -11,11 +11,10 @@ Links to:
 
 ## Logging in
 
-Authenticate to Yana:
+Authenticate to Yana. Login using the dialog shown below.
+It will have a URL similar to: [http://localhost:8080/yana/login/auth](http://localhost:8080/yana/login/auth)
 
 ![Login dialog](figures/fig03002.png)
-
-http://localhost:8080/yana/login/auth
 
 ## Nodes
 
