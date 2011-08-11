@@ -92,12 +92,12 @@ class NodeRestController {
             // Forbidden. The node already exists. 
             render status:403, contentType:"text/xml", encoding:"utf-8", {
                 errors {
-		    error {
+                    error {
                         message("Node already exists")
-		        references {
-		            node(id:nodeMap.id)
-		        }
-		    }
+                        references {
+                            node(id:nodeMap.id)
+                        }
+                    }
                 }
             }
         } else {
@@ -109,11 +109,11 @@ class NodeRestController {
                 render status:201, contentType:"text/xml", encoding:"utf-8", {
                     results {
                         result {
-			    message("Created new node")
+                            message("Created new node")
                             references {
                                 node(id:nodeInstance.id)
                             }
-			}
+                        }
                     }
                 }
             } else {
@@ -150,7 +150,7 @@ class NodeRestController {
                 render status:200,  contentType:"text/xml", encoding:"utf-8", {
                     results {
                         result {
-			    message("saved node data")
+                            message("saved node data")
                         }
                     }
                 }
@@ -172,9 +172,9 @@ class NodeRestController {
                 errors {
                     error {
                         message("Node not found")
-                    	references {
-		            node(id:params.id)
-		        }
+                        references {
+                            node(id:params.id)
+                        }
                     }
                 }
             }
@@ -216,11 +216,11 @@ class NodeRestController {
             render status:200, contentType:"text/xml", encoding:"utf-8", {
                 results {
                     result {
-		        message("Node removed")
+                        message("Node removed")
                         references {
                             node(id:params.id)
                         }
-		    }
+                    }
                 }
             }
         } else {
@@ -228,11 +228,11 @@ class NodeRestController {
             render status:202,  contentType:"text/xml", encoding:"utf-8", {
                 results {
                     result {
-		        message("Node not found")
+                        message("Node not found")
                         references {
                             node(id:params.id)
                         }
-		    }
+                    }
                 }
             }
         }
