@@ -54,7 +54,9 @@ class NodeRestControllerTests extends ControllerUnitTestCase {
         def results = new XmlSlurper().parseText(this.controller.response.contentAsString)
         def result = results.result[0]
         assertEquals("incorrect value for result", 
-                     "Node removed. id: 1", result.text())
+                     "Node removed", result.text())
+        assertEquals("incorrect value for node id",
+                     "1", result.references.node."@id".text())
 
     }
 
