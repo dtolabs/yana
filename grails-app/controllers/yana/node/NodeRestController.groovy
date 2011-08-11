@@ -87,8 +87,7 @@ class NodeRestController {
         def xmlnode = parser.parse(request.getInputStream())
         def nodeMap = XmlParserUtil.toObject(xmlnode)
         println "DEBUG: XmlParserUtil.toObject(xmlnode)= "+ nodeMap
-
-        if (Node.exists(nodeMap.id)) {
+        if (Node.exists(nodeMap.id) && null==params.update) {
             // Forbidden. The node already exists. 
             render status:403, contentType:"text/xml", encoding:"utf-8", {
                 errors {
@@ -101,15 +100,27 @@ class NodeRestController {
                 }
             }
         } else {
-            // Create a new node instance
-            def nodeInstance = Node.fromMap(nodeMap)
+            def operation = "Created"; // kind of db operation
+            def nodeInstance = Node.findByName(nodeMap.name)
+            if (nodeInstance) {
+                nodeInstance.properties = nodeMap
+                operation = "Updated"
+            } else {
+                // Create a new node instance
+                nodeInstance = Node.fromMap(nodeMap)
+            }
+
             nodeInstance.save(flush:true)
 
+            //
+            // Generate the response
+            //             
+            def code = ("Created".equals(operation)) ? 201 : 200
             if (nodeInstance && !nodeInstance.hasErrors()) {
                 render status:201, contentType:"text/xml", encoding:"utf-8", {
                     results {
                         result {
-                            message("Created new node")
+                            message("${operation} node.")
                             references {
                                 node(id:nodeInstance.id)
                             }
