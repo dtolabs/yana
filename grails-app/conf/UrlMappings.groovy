@@ -1,4 +1,5 @@
 
+
 class UrlMappings {
 
     static mappings = {
@@ -12,6 +13,7 @@ class UrlMappings {
         "/login/$action?"(controller: "login")
         "/logout/$action?"(controller: "logout")
 
+        // Nodes
         "/api/nodes"(controller: "nodeRest",  parseRequest:true) {
             action = [ GET: "list" , POST: "add" ]
         }
@@ -20,6 +22,16 @@ class UrlMappings {
             action = [ GET: "show" , POST: "save" , DELETE: "delete" ]
         }
 
+        "/api/nodes/$nodeId/tags"(controller: "nodeRest",  parseRequest:true) {
+            action = [ GET: "listTags" ]
+        }
+
+        // Apply and list tags on sets of Nodes
+        "/api/nodes/tags/$name"(controller: "tagRest", parseRequest:true) {
+            action = [ GET: "show", POST: "save", DELETE: "remove" ]
+        }
+
+        // Attributes
         "/api/attributes"(controller: "attributesRest") {
             action = [ GET: "list" ]
         }

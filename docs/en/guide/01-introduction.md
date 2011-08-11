@@ -3,8 +3,8 @@
 ## What is Yana?
 
 Yana is yet another node authority! What is a node authority?
-Yana is an information repository where you store information
-about hosts on your network. 
+A node authority is an information repository where one
+stores information about hosts on the network. 
 
 Driving tools and other operations management software from
 an up to date central repository about the nodes in your 

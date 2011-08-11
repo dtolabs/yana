@@ -5,6 +5,7 @@ class Tag {
 
     static constraints = {
         name(blank:false)
+        node(nullable:true)
     }
 
     static belongsTo = [ node : Node ]
@@ -27,5 +28,22 @@ class Tag {
         tagInstance.properties = map
  
         return tagInstance
+    }
+
+   // Mimics a "dynamic" find method
+    static  Set<Tag> findByNameAndNodeId(tagName, nodeId) {
+        println "DEBUG: inside findByNameAndNodeId. name=${tagName} nodeId=${nodeId}"        
+        def results = Tag.withCriteria {
+            eq('name',tagName)
+            node {
+                eq('id',nodeId)
+            }
+        }
+        
+        println "DEBUG: results class of " + results.getClass().getName()
+        results.each {
+            println "DEBUG: result it classof " + it.getClass().getName()
+        }
+        return results
     }
 }

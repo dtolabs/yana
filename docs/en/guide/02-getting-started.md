@@ -25,7 +25,7 @@ behavior driven from views of it.
      * `Tag`: A symbolic label that can be associated with a Node
          * Data: text
 
-     For attributes that are shared between nodes, two other concepts are useful:
+     For attributes that are shared between nodes, two other concepts can be useful:
      
      * `ExternalAttribute`: Like an `Attribute` but shareable between Nodes.
          * Data: name, value, description
@@ -59,8 +59,8 @@ behavior driven from views of it.
 
 :    Yana is not a CMDB. Yana is a repository of data about your Nodes.
      Other kinds of resources exist your environment like services,
-     network topology, packaged artefacts. One or more other tools
-     might already be providing this info in your environment now.
+     network topology, packaged artifacts. Other tools
+     may already be providing this info in your environment now.
 
 ## Installation
 

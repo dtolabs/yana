@@ -57,12 +57,12 @@ class Node {
            if (map.tags.tag instanceof List) {
                  map.tags.tag.each {
                    def tagInstance = Tag.fromMap(it)
-                   tagInstance.save(flush:true)
+                   tagInstance.save(flush:false)
                    nodeInstance.addToTags(tagInstance)
                  }
            } else if (map.tags.tag instanceof Map) {
                def tagInstance = Tag.fromMap(map.tags.tag)
-               tagInstance.save(flush:true)
+               tagInstance.save(flush:false)
                nodeInstance.addToTags(tagInstance)                    
            }
         }
@@ -73,12 +73,12 @@ class Node {
            if (map.attributes.attribute instanceof List) {
                  map.attributes.attribute.each {
                    def attrInstance = Attribute.fromMap(it)
-                   attrInstance.save(flush:true)
+                   attrInstance.save(flush:false)
                    nodeInstance.addToAttributes(attrInstance)
                  }
            } else if (map.attributes.attribute instanceof Map) {
                def attrInstance = Attribute.fromMap(map.attributes.attribute)
-               attrInstance.save(flush:true)
+               attrInstance.save(flush:false)
                nodeInstance.addToAttributes(attrInstance)
 
            }
@@ -90,12 +90,12 @@ class Node {
            if (map.externalAttributes.attributes instanceof List) {
                  map.externalAttributes.attributes.each {
                    def attrsInstance = Attributes.fromMap(it)
-                   attrsInstance.save(flush:true)
+                   attrsInstance.save(flush:false)
                    nodeInstance.addToExternalAttributes(attrsInstance)
                  }
            } else if (map.externalAttributes.attributes instanceof Map) {
                def attrsInstance = Attributes.fromMap(map.externalAttributes.attributes)
-               attrsInstance.save(flush:true)
+               attrsInstance.save(flush:false)
                nodeInstance.addToExternalAttributes(attrsInstance)                    
            }
         }
@@ -109,7 +109,38 @@ class Node {
        this.tags.each {tag->
            list << tag.name
        }
-       return list.join(delimiter)
+       return list.sort().join(delimiter)
+   }
+
+   // A dynamic (like?) find method
+   static Set<Node> findAllTagsByName(String name)  {
+       println "DEBUG: inside findAllTagsByName. name="+name
+       return Node.withCriteria {
+            tags {
+                eq('name',name)
+            }
+       }
+   }
+
+   // A dynamic (like?) find method
+   static Set<Node> findAllByNameLikeAndTagsByName(String nameLike, String tagName)  {
+       println "DEBUG: inside findAllByNameLikeAndTagsByName. name="+tagName
+       return Node.withCriteria {
+            ilike('name',nameLike)
+            tags {
+                eq('name',tagName)
+            }
+       }
+   }
+
+   def Set<Tag> findTagByName(String tagName) {
+     println "DEBUG: inside findTagByName. name="+tagName
+     return Tag.withCriteria {
+        eq('name',tagName)
+        node() {
+          eq('id',this.id)
+        }
+     }
    }
 }
 

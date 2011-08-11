@@ -1,7 +1,11 @@
+//
+// Docs command
+//
+
 includeTargets << grailsScript("Init")
 
-PANDOC = "pandoc"        // The pandoc executable
-DIST = "target/docs"     // Build target dir
+PANDOC = "pandoc"        // The pandoc executable in your PATH
+DIST = "target/docs"     // Target directory where docs are written
 
 
 target(main: "Builds the Yana documentation") {
@@ -38,8 +42,7 @@ target(html: "Generates the HTML pages" ) {
    depends( figures, userguide, apimanual, refpages )
    ant.echo ( message: 'Generating the index ...') 
    ant.copy ( file: "docs/en/index.md.template",
-              tofile: "${DIST}/html/index.md", filtering:true )
-  
+              tofile: "${DIST}/html/index.md", filtering:true )  
    // Concat the index files and generate index.html
    ant.exec ( executable: PANDOC ) {
      arg ( value: "-s" )
@@ -52,9 +55,7 @@ target(html: "Generates the HTML pages" ) {
      arg ( value: "-o" )
      arg ( value: "${DIST}/html/index.html" )
    }
-   ant.echo ( message: "Completed: ${DIST}/html/index.html")
-
-   
+   ant.echo ( message: "Completed: ${DIST}/html/index.html")   
 }
 
 target(userguide: "Generates the HTML pages" ) {

@@ -1,4 +1,4 @@
-% NODE-V10(5) YANA User Manuals | Version 1.0
+% NODE-V10(5) YANA Reference 
 % Alex Honor
 % August 03, 2011
 
@@ -10,7 +10,7 @@ The Node Model XML document declares a node model that can also be
 uploaded to a Yana server. This document describes the
 format and necessary elements.
 
-# Elements
+## node
 
 The root (aka "top-level") element of the node file is called `node`.
 
@@ -18,7 +18,7 @@ The root (aka "top-level") element of the node file is called `node`.
 
 name
 
-:   The node name. This is a logical identifier from the node. (required)
+:   The node name. This is a logical identifier from the node and must be unique. (required)
 
 description
 
@@ -31,6 +31,11 @@ osFamily
 osName
 
 :   The operating system name such as Linux or Mac OS X.  (optional)
+
+id
+
+:   The database identifier. If left out, a new object will be created.
+
 
 *Nested Elements*
 
@@ -46,7 +51,7 @@ osName
 
 :   Collection of external defined attributes
 
-## attributes
+### attributes
 
 Defines a collection of attribute elements for the node.
 
@@ -56,7 +61,7 @@ Defines a collection of attribute elements for the node.
 
 :   Further user defined attribute.
 
-## attribute
+### attribute
 
 A single metadata attribute.
 
@@ -70,7 +75,7 @@ value
 
 :   The value of the attribute
 
-## tags
+### tags
 
 Collection of symbolic names for the node
 
@@ -80,7 +85,7 @@ Collection of symbolic names for the node
 
 :   Single tag definition
 
-## tag
+### tag
 
 A single tag definition
 
@@ -88,7 +93,7 @@ A single tag definition
 
 ## name
 
-:   The name
+:   The name. Must be unqiue.
 
 
 

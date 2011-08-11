@@ -16,8 +16,8 @@ class NodeRestControllerTests extends ControllerUnitTestCase {
         mockDomain(Node, [
                        new Node(name: "node1", osFamily: "unix")
                    ])
-        def model = this.controller.list()
-        assertNotNull("model was null", model)
+        def result = this.controller.list()
+        assertNotNull("result was null", result)
         def list = new XmlSlurper().parseText(this.controller.response.contentAsString)
         def allNodes = list.node
         assertEquals "wrong node list size", 1, list.size()
@@ -34,8 +34,8 @@ class NodeRestControllerTests extends ControllerUnitTestCase {
                        new Node(name: "testShow", osFamily: "unix")
                    ])
         this.controller.params.id = 1
-        def model = this.controller.show()
-        assertNotNull "model was null", (model)
+        def result = this.controller.show()
+        assertNotNull "result was null", (result)
         def node = new XmlSlurper().parseText(this.controller.response.contentAsString)
 
         assertEquals("incorrect value for name", "testShow", node.name.text())
@@ -49,8 +49,8 @@ class NodeRestControllerTests extends ControllerUnitTestCase {
                        new Node(name: "testDelete", osFamily: "unix")
                    ])
         this.controller.params.id = 1
-        def model = this.controller.delete()
-        assertNotNull "model was null", (model)
+        def content = this.controller.delete()
+        assertNotNull "result was null", (content)
         def results = new XmlSlurper().parseText(this.controller.response.contentAsString)
         def result = results.result[0]
         assertEquals("incorrect value for result", 
@@ -58,6 +58,31 @@ class NodeRestControllerTests extends ControllerUnitTestCase {
 
     }
 
+    void testListTags() {
+
+
+        Node node1 = new Node(name: 'node1', osFamily:'unix') 
+        Tag tag1 =  new Tag(name: 'roleA') 
+
+        mockDomain(Node, [node1])
+        mockDomain(Tag, [tag1])
+        node1.addToTags(tag1)
+        node1.save()
+        assertNotNull "instance did not validate", node1.save()
+        this.controller.params.id = 1        
+        def result = this.controller.listTags()
+        assertNotNull("result was null", result)
+        assertNotNull "Null content in response", this.controller.response.contentAsString
+        assertTrue "empty content in response", "" != this.controller.response.contentAsString
+        def root = new XmlSlurper().parseText(this.controller.response.contentAsString)
+
+
+        println "TEST: contentAsString:"+this.controller.response.contentAsString
+        def allTags = root.tag
+        assertEquals "wrong tag list size", 1, allTags.size()
+        def firstTag = root.tag[0]
+        assertEquals "incorrect value for name", "roleA", firstTag."name".text()
+    }
 
     void testRundeckXml() {
 

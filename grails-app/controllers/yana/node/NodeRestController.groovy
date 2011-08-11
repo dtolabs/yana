@@ -203,5 +203,26 @@ class NodeRestController {
         }
     }
 
+    //
+    // List the tags. Url: GET /api/nodes/{id}/tags
+    //
+    def listTags = {      
+        Node obj = Node.get(params.id)
+        if (obj) {
+            def writer = new StringWriter()
+            def xml = new MarkupBuilder(writer)
+            def list = obj.tags
+            xml.tags() {
+                list.each{ Tag tagInstance->
+                    tag(id:tagInstance.id) {
+                        name(tagInstance.name)
+                    }
+                }
+            }
+            render writer.toString()
+        } else {
+            response.sendError(404)
+        }
+    }
 
 }
