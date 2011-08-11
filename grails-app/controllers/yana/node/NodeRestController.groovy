@@ -92,7 +92,12 @@ class NodeRestController {
             // Forbidden. The node already exists. 
             render status:403, contentType:"text/xml", encoding:"utf-8", {
                 errors {
-                    message("Node already exists. id: "+ nodeMap.id)
+		    error {
+                        message("Node already exists")
+		        references {
+		            node(id:nodeMap.id)
+		        }
+		    }
                 }
             }
         } else {
@@ -103,7 +108,12 @@ class NodeRestController {
             if (nodeInstance && !nodeInstance.hasErrors()) {
                 render status:201, contentType:"text/xml", encoding:"utf-8", {
                     results {
-                        result("Created new node. id: " + nodeInstance.id)
+                        result {
+			    message("Created new node")
+                            references {
+                                node(id:nodeInstance.id)
+                            }
+			}
                     }
                 }
             } else {
@@ -111,8 +121,10 @@ class NodeRestController {
                 render status:400, contentType:"text/xml", encoding:"utf-8", {
                     errors {
                         nodeInstance?.errors?.fieldErrors?.each { err ->
-                           field(err.field)
-                           message(g.message(error: err))
+                            error {
+                                field(err.field)
+                                message(g.message(error: err))
+                            }
                         }
                     }
                 }
@@ -137,15 +149,19 @@ class NodeRestController {
             if (!nodeInstance.hasErrors() && nodeInstance.save(flush:true)) {
                 render status:200,  contentType:"text/xml", encoding:"utf-8", {
                     results {
-                        result("saved node data")
+                        result {
+			    message("saved node data")
+                        }
                     }
                 }
            } else {
                 render status:403, contentType:"text/xml", encoding:"utf-8", {
                     errors {
                         nodeInstance?.errors?.fieldErrors?.each { err ->
-                           field(err.field)
-                           message(g.message(error: err))
+                            error {
+                                field(err.field)
+                                message(g.message(error: err))
+                            }
                         }
                     }
                 }
@@ -154,7 +170,12 @@ class NodeRestController {
             // Not Found.
             render status:404, contentType:"text/xml", encoding:"utf-8", {
                 errors {
-                    message("Node not found. id: " + params.id)
+                    error {
+                        message("Node not found")
+                    	references {
+		            node(id:params.id)
+		        }
+                    }
                 }
             }
         }
@@ -162,7 +183,9 @@ class NodeRestController {
         if (nodeInstance && !nodeInstance.hasErrors()) {
             render status:202, contentType: "text/xml", encoding: "utf-8", {
                 results {
-                   result("Node info saved")
+                    result {
+                        message("Node info saved")
+                    }
                 }
             }
         } else {
@@ -170,8 +193,10 @@ class NodeRestController {
             render status:400, contentType:"text/xml", encoding:"utf-8", {
                 errors {
                     nodeInstance?.errors?.fieldErrors?.each { err ->
-                      field(err.field)
-                      message(g.message(error: err))
+                        error {
+                            field(err.field)
+                            message(g.message(error: err))
+                        }
                     }
                 }
             }
@@ -190,14 +215,24 @@ class NodeRestController {
             // Ok.
             render status:200, contentType:"text/xml", encoding:"utf-8", {
                 results {
-                    result("Node removed. id: " + params.id)
+                    result {
+		        message("Node removed")
+                        references {
+                            node(id:params.id)
+                        }
+		    }
                 }
             }
         } else {
             // Accepted.
             render status:202,  contentType:"text/xml", encoding:"utf-8", {
                 results {
-                    result("Node not found. id: " + params.id)
+                    result {
+		        message("Node not found")
+                        references {
+                            node(id:params.id)
+                        }
+		    }
                 }
             }
         }
