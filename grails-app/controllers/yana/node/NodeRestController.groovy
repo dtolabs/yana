@@ -13,7 +13,13 @@ class NodeRestController {
     // List the nodes. Url: GET /api/nodes
     //
     def list = { 
-        def list = Node.list()
+        def list = []
+        if (params.tags) {
+            list = Node.findAllTagsByName(params.tags)
+        } else {
+            list = Node.list()
+        }
+
         println "DEBUG: params.format="+params.format
         switch (params.format) {
             case "json":
