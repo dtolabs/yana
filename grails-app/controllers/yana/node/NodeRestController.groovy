@@ -26,7 +26,7 @@ class NodeRestController {
                 render list as JSON 
                 break
             case "rundeck-xml":
-                render generateRundeckXml(list)
+                render(text: generateRundeckXml(list), contentType: "text/xml")
                 break;
             default:
                 render list as XML  
